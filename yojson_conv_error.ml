@@ -66,10 +66,7 @@ let rec record_get_undefined_loop fields = function
 let record_undefined_elements loc yojson lst =
   let undefined = record_get_undefined_loop [] lst in
   let msg =
-    sprintf
-      "%s_of_yojson: the following record elements were undefined: %s"
-      loc
-      undefined
+    sprintf "%s_of_yojson: the following record elements were undefined: %s" loc undefined
   in
   of_yojson_error msg yojson
 ;;
@@ -99,9 +96,7 @@ let no_matching_variant_found loc yojson =
 ;;
 
 let ptag_no_args loc yojson =
-  of_yojson_error
-    (loc ^ "_of_yojson: polymorphic variant does not take arguments")
-    yojson
+  of_yojson_error (loc ^ "_of_yojson: polymorphic variant does not take arguments") yojson
 ;;
 
 let ptag_incorrect_n_args loc cnstr yojson =
