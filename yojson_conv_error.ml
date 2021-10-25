@@ -15,7 +15,7 @@ let tuple_of_size_n_expected loc n yojson =
 (* Errors concerning sum types *)
 
 let stag_no_args loc yojson =
-  of_yojson_error (loc ^ "_of_yojson: sum tag does not take arguments") yojson
+  of_yojson_error (loc ^ "_of_yojson: this constructor does not take arguments") yojson
 ;;
 
 let stag_incorrect_n_args loc tag yojson =
@@ -26,19 +26,19 @@ let stag_incorrect_n_args loc tag yojson =
 ;;
 
 let stag_takes_args loc yojson =
-  of_yojson_error (loc ^ "_of_yojson: sum tag must be a structured value") yojson
+  of_yojson_error (loc ^ "_of_yojson: this constructor requires arguments") yojson
 ;;
 
 let nested_list_invalid_sum loc yojson =
-  of_yojson_error (loc ^ "_of_yojson: a nested list is an invalid sum") yojson
+  of_yojson_error (loc ^ "_of_yojson: expected a variant type, saw a nested list") yojson
 ;;
 
 let empty_list_invalid_sum loc yojson =
-  of_yojson_error (loc ^ "_of_yojson: the empty list is an invalid sum") yojson
+  of_yojson_error (loc ^ "_of_yojson: expected a variant type, saw an empty list") yojson
 ;;
 
 let unexpected_stag loc yojson =
-  of_yojson_error (loc ^ "_of_yojson: unexpected sum tag") yojson
+  of_yojson_error (loc ^ "_of_yojson: unexpected variant constructor") yojson
 ;;
 
 (* Errors concerning records *)
