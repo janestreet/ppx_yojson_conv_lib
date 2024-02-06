@@ -1,2 +1,5 @@
-(library (name ppx_yojson_conv_lib) (public_name ppx_yojson_conv_lib)
- (libraries yojson) (preprocess no_preprocessing))
+(library
+ (name ppx_yojson_conv_lib)
+ (public_name ppx_yojson_conv_lib)
+ (libraries yojson)
+ (preprocess no_preprocessing))
