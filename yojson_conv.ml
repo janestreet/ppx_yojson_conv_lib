@@ -30,8 +30,8 @@ let yojson_of_triple yojson_of__a yojson_of__b yojson_of__c (a, b, c) =
   `List [ yojson_of__a a; yojson_of__b b; yojson_of__c c ]
 ;;
 
-(* List.rev (List.rev_map ...) is tail recursive, the OCaml standard
-   library List.map is NOT. *)
+(* List.rev (List.rev_map ...) is tail recursive, the OCaml standard library List.map is
+   NOT. *)
 let yojson_of_list yojson_of__a lst = `List (List.rev (List.rev_map ~f:yojson_of__a lst))
 
 let yojson_of_array yojson_of__a ar =
