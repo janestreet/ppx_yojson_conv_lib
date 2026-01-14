@@ -1,5 +1,4 @@
-(* Conv_error: Module for Handling Errors during Automated Yojson
-   Conversions *)
+(* Conv_error: Module for Handling Errors during Automated Yojson Conversions *)
 
 open! StdLabels
 open Yojson_conv
