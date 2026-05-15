@@ -43,8 +43,8 @@ let unexpected_stag loc yojson =
 (* Errors concerning records *)
 
 let record_superfluous_fields ~what ~loc rev_fld_names yojson =
-  let fld_names_str = String.concat (List.rev rev_fld_names) ~sep:" " in
-  let msg = sprintf "%s_of_yojson: %s: %s" loc what fld_names_str in
+  let fld_names_str = String.concat (List.rev rev_fld_names) ~sep:"' '" in
+  let msg = sprintf "%s_of_yojson: %s: '%s'" loc what fld_names_str in
   of_yojson_error msg yojson
 ;;
 
@@ -57,7 +57,7 @@ let record_extra_fields loc rev_fld_names yojson =
 ;;
 
 let rec record_get_undefined_loop fields = function
-  | [] -> String.concat (List.rev fields) ~sep:" "
+  | [] -> String.concat (List.rev fields) ~sep:"' '"
   | (true, field) :: rest -> record_get_undefined_loop (field :: fields) rest
   | _ :: rest -> record_get_undefined_loop fields rest
 ;;
@@ -65,7 +65,10 @@ let rec record_get_undefined_loop fields = function
 let record_undefined_elements loc yojson lst =
   let undefined = record_get_undefined_loop [] lst in
   let msg =
-    sprintf "%s_of_yojson: the following record elements were undefined: %s" loc undefined
+    sprintf
+      "%s_of_yojson: the following record elements were undefined: '%s'"
+      loc
+      undefined
   in
   of_yojson_error msg yojson
 ;;
