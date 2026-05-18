@@ -52,6 +52,18 @@ let yojson_of_fun _ = `String "<fun>"
 
 exception Of_yojson_error of exn * t
 
+let () =
+  Printexc.register_printer (function
+    | Of_yojson_error (exn, t) ->
+      Some
+        (Printf.sprintf
+           "Of_yojson_error (%s, %s)"
+           (Printexc.to_string exn)
+           (to_string (t : t :> Yojson.t)))
+    | _ -> None)
+[@@alert "-unsafe_multidomain"]
+;;
+
 let record_check_extra_fields = ref true
 let of_yojson_error_exn exc yojson = raise (Of_yojson_error (exc, yojson))
 let of_yojson_error what yojson = raise (Of_yojson_error (Failure what, yojson))

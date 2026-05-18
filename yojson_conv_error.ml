@@ -43,7 +43,11 @@ let unexpected_stag loc yojson =
 (* Errors concerning records *)
 
 let record_superfluous_fields ~what ~loc rev_fld_names yojson =
-  let fld_names_str = String.concat (List.rev rev_fld_names) ~sep:" " in
+  let fld_names =
+    List.rev_map rev_fld_names ~f:(fun name ->
+      if String.contains name ' ' then sprintf "%S" name else name)
+  in
+  let fld_names_str = String.concat fld_names ~sep:" " in
   let msg = sprintf "%s_of_yojson: %s: %s" loc what fld_names_str in
   of_yojson_error msg yojson
 ;;
